@@ -26,10 +26,10 @@ class Personne
 	/** Email **/
 	private string $pwd;
 	/** Adresse */
-	private Adresse $adresse;
+	//private Adresse $adresse;
 
 
-	public function __construct(string $n, string $p, DateTime $d, $t, $e, $l, $pw, Adresse $ad)
+	public function __construct(string $n, string $p, DateTime $d, $t, $e, $l, $pw/*, Adresse $ad*/)
 	{
 
 		$this->nom = $n;
@@ -39,7 +39,7 @@ class Personne
 		$this->email = $e;
 		$this->login = $l;
 		$this->pwd = $pw;
-		$this->ad = $ad;
+		//$this->ad = $ad;
 	}
 
 	/**
@@ -78,10 +78,10 @@ class Personne
 	{
 		return $this->pwd;
 	}
-	public function getAdresse()
+	/*public function getAdresse()
 	{
 		return $this->adresse;
-	}
+	}*/
 
 
 	/**
@@ -136,12 +136,12 @@ class Personne
 			$this->pwd = md5($pw);
 		}
 	}
-	public function setAdresse(Adresse $ad)
+	/*public function setAdresse(Adresse $ad)
 	{
 		if($ad != null){
 			$this->adresse = $ad;
 		}
-	}
+	}*/
 
 
 	/**
@@ -157,7 +157,7 @@ class Personne
 			. $this->getTelephone() . ','
 			. $this->getEmail() . ','
 			. $this->getLogin() . ','
-			. $this->getPwd() . ','
-			. $this->getAdresse() . ']';
+			. $this->getPwd() . //','
+			/*. $this->getAdresse() . */']';
 	}
 }

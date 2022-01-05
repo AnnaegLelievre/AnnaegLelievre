@@ -31,7 +31,7 @@ class AdresseDBTest extends TestCase
     protected function setUp(): void
     {
         //parametre de connexion à la bae de donnée
-        $strConnection = Constantes::TYPE . ':host=' . Constantes::HOST . ';dbname=' . Constantes::BASE;
+        $strConnection = Constantes::TYPE . ':host=' . Constantes::HOST . '3309;dbname=' . Constantes::BASE;
         $arrExtraParam = array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8");
         $this->pdodb = new PDO($strConnection, Constantes::USER, Constantes::PASSWORD, $arrExtraParam); //Ligne 3; Instancie la connexion
         $this->pdodb->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -56,7 +56,7 @@ class AdresseDBTest extends TestCase
         try {
             $this->adresse = new AdresseDB($this->pdodb);
 
-            $p = new Adresse(6, 6, "Larue", 35000, "Laville", 5);
+            $p = new Adresse(6, 6, "Larue", 35000, "Laville");
             //insertion en bdd
             $this->adresse->ajout($p);
 
@@ -67,7 +67,6 @@ class AdresseDBTest extends TestCase
             $this->assertEquals($p->getRue(), $adr->getRue());
             $this->assertEquals($p->getCodePostal(), $adr->getCodePostal());
             $this->assertEquals($p->getVille(), $adr->getVille());
-            $this->assertEquals($p->getIdPers(), $adr->getIdPers());
         } catch (Exception $e) {
             echo 'Exception recue : ',  $e->getMessage(), "\n";
         }
@@ -115,7 +114,6 @@ class AdresseDBTest extends TestCase
         $this->assertEquals($p->getRue(), $p->getRue());
         $this->assertEquals($p->getCodePostal(), $p->getCodePostal());
         $this->assertEquals($p->getVille(), $p->getVille());
-        $this->assertEquals($p->getIdPers(), $p->getIdPers());
     }
 
     /**
@@ -151,7 +149,6 @@ class AdresseDBTest extends TestCase
         $tab["rue"] = "Larue";
         $tab["codepostal"] = 35000;
         $tab["ville"] = "Laville";
-        $tab["id_pers"] = 12;
         $this->adresse = new AdresseDB($this->pdodb);
         $adr = $this->adresse->convertPdoAdr($tab);
         $this->assertEquals($tab["id"], $adr->getId());
@@ -159,7 +156,6 @@ class AdresseDBTest extends TestCase
         $this->assertEquals($tab["rue"], $adr->getRue());
         $this->assertEquals($tab["codepostal"], $adr->getCodePostal());
         $this->assertEquals($tab["ville"], $adr->getVille());
-        $this->assertEquals($tab["id_pers"], $adr->getIdPers());
     }
 
     /**
@@ -172,13 +168,13 @@ class AdresseDBTest extends TestCase
 
         $this->adresse = new AdresseDB($this->pdodb);
         //insertion en bdd de l'enreg
-        $p = new Adresse(1, 67, "Lotrerue", 56000, "Lotreville", 1);
+        $p = new Adresse(1, 67, "Lotrerue", 56000, "Lotreville");
         //insertion en bdd
         $this->adresse->ajout($p);
 
         //instanciation de l'objet pour mise ajour
 
-        $p = new Adresse(1, 4, "thatRue", 35000, "thatVille", 1);
+        $p = new Adresse(1, 4, "thatRue", 35000, "thatVille");
         //update pers 
         $lastId = $this->pdodb->lastInsertId();
         $p->setId($lastId);
@@ -189,6 +185,5 @@ class AdresseDBTest extends TestCase
         $this->assertEquals($p->getRue(), $adr->getRue());
         $this->assertEquals($p->getCodePostal(), $adr->getCodePostal());
         $this->assertEquals($p->getVille(), $adr->getVille());
-        $this->assertEquals($p->getIdPers(), $adr->getIdPers());
     }
 }

@@ -14,16 +14,13 @@ class Adresse
     private ?string $rue;
     private ?int $codePostal;
     private ?string $ville;
-    private int $id_pers;
 
-    function __construct(int $id, int $numero, string $rue, int $codePostal, string $ville, int $id_pers)
+    function __construct(int $id, int $numero, string $rue, int $codePostal, string $ville)
     {
-        $this->id = $id;
         $this->numero = $numero;
         $this->rue = $rue;
         $this->codePostal = $codePostal;
         $this->ville = $ville;
-        $this->id_pers = $id_pers;
     }
 
     function getId()
@@ -51,11 +48,6 @@ class Adresse
         return $this->ville;
     }
 
-    function getIdPers()
-    {
-        return $this->id_pers;
-    }
-
     function setId($id)
     {
         $this->id = $id;
@@ -81,11 +73,6 @@ class Adresse
         $this->ville = $ville;
     }
 
-    function setIdPers($id_pers)
-    {
-        $this->id_pers = $id_pers;
-    }
-
     /**
      *
      * renvoie sous forme de chaine de caracteres l'objet adresse en appelant echo ou print
@@ -97,7 +84,6 @@ class Adresse
             . $this->getNumero() . ','
             . $this->getRue() . ','
             . $this->getCodePostal() . ','
-            . $this->getVille() . ','
-            . $this->getIdPers() . ']';
+            . $this->getVille() . ']';
     }
 }

@@ -31,7 +31,7 @@ class PersonneDBTest extends TestCase
     protected function setUp(): void
     {
         //parametre de connexion à la bae de donnée
-        $strConnection = Constantes::TYPE . ':host=' . Constantes::HOST . ';dbname=' . Constantes::BASE;
+        $strConnection = Constantes::TYPE . ':host=' . Constantes::HOST . '3309;dbname=' . Constantes::BASE;
         $arrExtraParam = array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8");
         $this->pdodb = new PDO($strConnection, Constantes::USER, Constantes::PASSWORD, $arrExtraParam); //Ligne 3; Instancie la connexion
         $this->pdodb->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

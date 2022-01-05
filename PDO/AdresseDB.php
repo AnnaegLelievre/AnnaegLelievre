@@ -25,14 +25,12 @@ class AdresseDB
 	public function ajout(Adresse $p)
 	{
 		//TODO insertion de l'adresse en bdd
-		$sql = $this->db->prepare('INSERT INTO personne(id,numero,rue,codepostal,ville, id_pers) values(:id,:numero,:rue,:codePostal,:ville,:id_pers');
+		$sql = $this->db->prepare('INSERT INTO adresse(numero,rue,codepostal,ville) values(:numero,:rue,:codePostal,:ville');
 
-		$sql->bindValue(':id', $p->getId());
 		$sql->bindValue(':numero', $p->GetNumero());
 		$sql->bindValue(':rue', $p->getRue());
 		$sql->bindValue(':codePostal', $p->getCodePostal());
 		$sql->bindValue(':ville', $p->getVille());
-		$sql->bindValue(':id_pers', $p->getIdPers());
 		$sql->execute();
 		$sql->closeCursor();
 		$sql = NULL;
@@ -61,13 +59,11 @@ class AdresseDB
 	{
 		try {
 			//TODO mise a jour de l'adresse en bdd
-			$sql = $this->db->prepare('UPDATE personne set numero=:numero,rue=:rue,codepostal=:codePostal,ville=:ville,id_pers=:id_pers where id=:id');
-			$sql->bindValue(':id', $p->getId());
+			$sql = $this->db->prepare('UPDATE personne set numero=:numero,rue=:rue,codepostal=:codePostal,ville=:ville where id=:id');
 			$sql->bindValue(':numero', $p->GetNumero());
 			$sql->bindValue(':rue', $p->getRue());
 			$sql->bindValue(':codePostal', $p->getCodePostal());
 			$sql->bindValue(':ville', $p->getVille());
-			$sql->bindValue(':id_pers', $p->getIdPers());
 			$sql->execute();
 			$sql->closeCursor();
 			$sql = NULL;
@@ -85,7 +81,7 @@ class AdresseDB
 	public function selectAll()
 	{
 		//TODO selection de l'adresse
-		$query = 'SELECT id,numero,rue,codepostal,ville,id_pers';
+		$query = 'SELECT id,numero,rue,codepostal,ville';
 		$q = $this->db->prepare($query);
 		$q->execute();
 
@@ -109,7 +105,7 @@ class AdresseDB
 	public function selectAdresse($id)
 	{
 		//TODO selection de l'adresse en fonction de son id
-		$query = 'SELECT id,numero,rue,codepostal,ville,id_pers FROM   WHERE id= :id ';
+		$query = 'SELECT id,numero,rue,codepostal,ville FROM   WHERE id= :id ';
 		$q = $this->db->prepare($query);
 
 
@@ -141,7 +137,7 @@ class AdresseDB
 		$obj = (object)$pdoAdres;
 		//print_r($obj);
 		//conversion de l'objet en objet adresse
-		$adr = new Adresse($obj->id, $obj->numero, $obj->rue, $obj->codePostal, $obj->ville, $obj->id_pers);
+		$adr = new Adresse($obj->id, $obj->numero, $obj->rue, $obj->codePostal, $obj->ville);
 		//affectation de l'id adr
 		$adr->setId($obj->id);
 		return $adr;

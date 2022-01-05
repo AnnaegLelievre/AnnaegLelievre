@@ -22,7 +22,7 @@ class AdresseTest extends TestCase
      */
     protected function setUp(): void
     {
-        $adr = new Adresse(1, 4, "rue de saint honoré", 44000, "Nantes", 1);
+        $adr = new Adresse(1, 4, "rue de saint honoré", 44000, "Nantes");
         $adr->setId(1);
         $this->adresse = $adr;
     }
@@ -69,11 +69,6 @@ class AdresseTest extends TestCase
     public function testGetVille()
     {
         $this->assertEquals("Nantes", $this->adresse->getVille());
-    }
-
-    public function testGetIdPers()
-    {
-        $this->assertEquals(1, $this->adresse->getIdPers());
     }
 
     /**
@@ -126,7 +121,7 @@ class AdresseTest extends TestCase
      */
     public function test__toString()
     {
-        $this->assertEquals("[" . $this->adresse->getId() . "," . $this->adresse->getNumero() . "," . $this->adresse->getRue() . "," . $this->adresse->getCodePostal() . "," . $this->adresse->getVille() . "," . $this->adresse->getIdPers() . "]", $this->adresse->__toString());
+        $this->assertEquals("[" . $this->adresse->getId() . "," . $this->adresse->getNumero() . "," . $this->adresse->getRue() . "," . $this->adresse->getCodePostal() . "," . $this->adresse->getVille() . "]", $this->adresse->__toString());
         echo $this->adresse;
     }
 }
