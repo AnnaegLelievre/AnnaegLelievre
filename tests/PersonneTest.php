@@ -27,7 +27,7 @@ class PersonneTest extends TestCase
         // TODO Auto-generated PersonneTest::setUp()
         $date = '15/12/1950';
         $dt = DateTime::createFromFormat('d/m/Y', $date);
-        $this->personne = new Personne("Hollande", "Francois", $dt, "0656463524", "fhollande@free.fr", "fhollande", "monpwd", new Adresse(1, 5, "Ruaudaie", 56910, "Saint-Nicolas"));
+        $this->personne = new Personne("Hollande", "Francois", $dt, "0656463524", "fhollande@free.fr", "fhollande", "monpwd", new Adresse(1, 5, "Ruaudaie", 56910, "Saint-Nicolas", 1));
         $this->personne->setId(49);
     }
 

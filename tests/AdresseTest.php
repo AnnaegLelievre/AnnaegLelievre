@@ -22,7 +22,9 @@ class AdresseTest extends TestCase
      */
     protected function setUp(): void
     {
-        $this->adresse = new Adresse(3, 4, "rue de saint honoré", 44000, "Nantes", 2);
+        $adr = new Adresse(3, 4, "rue de saint honoré", 44000, "Nantes", 2);
+        $adr->setId(1);
+        $this->adresse = $adr;
     }
     /**
      *  @coversNothing
@@ -36,14 +38,14 @@ class AdresseTest extends TestCase
      */
     public function testGetId()
     {
-        $this->assertEquals("3", $this->adresse->getId());
+        $this->assertEquals(1, $this->adresse->getId());
     }
     /**
      * @covers Adresse::getNumero
      */
     public function testGetNumero()
     {
-        $this->assertEquals("4", $this->adresse->getNumero());
+        $this->assertEquals(4, $this->adresse->getNumero());
     }
     /**
      * @covers Adresse::getRue
