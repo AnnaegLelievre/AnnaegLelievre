@@ -132,7 +132,6 @@ class AdresseDBTest extends TestCase
         foreach ($res as $key => $value) {
             $i++;
         }
-        print_r($res);
         if ($i == 0) {
             $this->markTestIncomplete('Pas de résultat');
             $ok = false;

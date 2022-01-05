@@ -89,12 +89,16 @@ class AdresseDB
 		$q = $this->db->prepare($query);
 		$q->execute();
 
-		$result = $q->fetchAll(PDO::FETCH_ASSOC);
+		$result = $q->fetchAll(PDO::FETCH_CLASS);
 
 		//TODO definir constante de l'exception
 		if (empty($result)) {
 			throw new Exception(Constantes::EXCEPTION_DB_ADRESSE);
 		}
+
+		$q->closeCursor();
+		$q = NULL;
+		return $result;
 	}
 	/**
 	 * 

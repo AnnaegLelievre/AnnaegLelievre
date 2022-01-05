@@ -45,7 +45,7 @@ class vueAjoutLivre extends Vue
 				<button class="btn btn-primary" type="submit">Modifier</button>
 			</div>
 		</form>
-
+<!--
 		<link rel="stylesheet" type="text/css" href="https://releases.jquery.com/git/ui/jquery-ui-git.css">
 		<script type="text/javascript" src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
 		<script>
@@ -53,6 +53,33 @@ class vueAjoutLivre extends Vue
 				jQuery("input[name=datenaissance]").datepicker();
 			});
 		</script>
+
+		<script LANGUAGE="javascript">
+			$(document).ready(function() {
+				$('input[name*=newpwd]').on("input", function() {
+					if ($('input[name=newpwd]').val() != $('input[name=newpwd2]').val()) {
+						$('input[name*=newpwd]').addClass('is-invalid');
+					} else {
+						$('input[name*=newpwd]').removeClass('is-invalid');
+					}
+				});
+				$(".verif_form").submit(function() {
+					if (!$('input[name*=newpwd]').hasClass('is-invalid')) {
+						$.post($(this).attr("action"), $(this).serialize(), function(data) {
+							console.log(data);
+							var ok = data.substr(0, 2);
+							var token = data.substr(3, data.length);
+							if (ok == "ok") {
+								$(location).attr('href', "index.php?action=moncompte&id=" + token);
+							} else
+								$("#messagee").html(data).show();
+						});
+					}
+					return false;
+				});
+			});
+		</script>
+		-->
 <?php include "footer.html";
 	}
 }
