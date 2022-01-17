@@ -18,7 +18,8 @@ class AdresseTest extends TestCase
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      * Prepares the environment before running a test.
-     *  @coversNothing
+     *
+     * @coversNothing
      */
     protected function setUp(): void
     {
@@ -27,7 +28,7 @@ class AdresseTest extends TestCase
         $this->adresse = $adr;
     }
     /**
-     *  @coversNothing
+     * @coversNothing
      */
     protected function tearDown(): void
     {

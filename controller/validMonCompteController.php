@@ -3,14 +3,15 @@ class validMonCompteController
 {
 
     public function __construct()
-    {  //TODO    
+    {
+        //TODO    
         session_start();
         $login = $_POST['login'];
         $pwd = $_POST['pwd'];
-        require_once "pdo/connectionPDO.php";
-        require_once "Constantes.php";
-        require_once "metier/Personne.php";
-        require_once "pdo/PersonneDB.php";
+        include_once "pdo/connectionPDO.php";
+        include_once "Constantes.php";
+        include_once "metier/Personne.php";
+        include_once "pdo/PersonneDB.php";
         //connexion a la bdd
         $accesPersBDD = new PersonneDB($pdo);
         $result = $accesPersBDD->authentification($login, $pwd);

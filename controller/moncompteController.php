@@ -1,13 +1,14 @@
 <?php
-class moncompteController{
+class moncompteController
+{
 
     public function __construct()
-	{      
+    {      
         //TODO
         session_start();
         //error_reporting(0);
-        require_once "controller/Controller.php";
-        require_once "vue/vueMonCompte.php";
+        include_once "controller/Controller.php";
+        include_once "vue/vueMonCompte.php";
 
 
         if (Controller::auth()) {

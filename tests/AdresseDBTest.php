@@ -3,7 +3,7 @@
 use PHPUnit\Framework\TestCase;
 
 require_once "Constantes.php";
-include_once "PDO/connectionPDO.php";
+require_once "PDO/connectionPDO.php";
 require_once "metier/Adresse.php";
 require_once "PDO/AdresseDB.php";
 
@@ -23,7 +23,7 @@ class AdresseDBTest extends TestCase
 
     /**
      * 
-     * @backupGlobals disabled
+     * @backupGlobals          disabled
      * @backupStaticAttributes disabled
      * @coversNothing
      */
@@ -38,7 +38,7 @@ class AdresseDBTest extends TestCase
     }
 
     /**
-     *@coversNothing
+     * @coversNothing
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
      */
@@ -47,8 +47,8 @@ class AdresseDBTest extends TestCase
     }
 
     /**
-     * @covers AdresseDB::ajout
-     * @backupGlobals disabled
+     * @covers                 AdresseDB::ajout
+     * @backupGlobals          disabled
      * @backupStaticAttributes disabled
      */
     public function testAjout()
@@ -75,8 +75,8 @@ class AdresseDBTest extends TestCase
     }
 
     /**
-     * @covers AdresseDB::suppression
-     * @backupGlobals disabled
+     * @covers                 AdresseDB::suppression
+     * @backupGlobals          disabled
      * @backupStaticAttributes disabled
      */
     public function testSuppression()
@@ -101,16 +101,15 @@ class AdresseDBTest extends TestCase
 
     /**
      * @covers AdresseDB::selectionId
-     *
      */
     /**
-     * @backupGlobals disabled
+     * @backupGlobals          disabled
      * @backupStaticAttributes disabled
      */
     public function testSelectAdresse()
     {
         $this->adresse = new AdresseDB($this->pdodb);
-        $p = new Adresse("4", "Rue de la rue", "56000", "Vannes");
+        $p = new Adresse(4, "Rue de la rue", 56000, "Vannes");
         $this->adresse->ajout($p);
         $lastId = $this->pdodb->lastInsertId();
         $p->setId($lastId);
@@ -124,8 +123,8 @@ class AdresseDBTest extends TestCase
     }
 
     /**
-     * @covers AdresseDB::selectAll
-     * @backupGlobals disabled
+     * @covers                 AdresseDB::selectAll
+     * @backupGlobals          disabled
      * @backupStaticAttributes disabled
      */
     public function testSelectAll()
@@ -145,8 +144,8 @@ class AdresseDBTest extends TestCase
     }
 
     /**
-     * @covers AdresseDB::convertPdoAdr
-     * @backupGlobals disabled
+     * @covers                 AdresseDB::convertPdoAdr
+     * @backupGlobals          disabled
      * @backupStaticAttributes disabled
      */
     public function testConvertPdoAdr()
@@ -166,8 +165,8 @@ class AdresseDBTest extends TestCase
     }
 
     /**
-     * @covers AdresseDB::update
-     * @backupGlobals disabled
+     * @covers                 AdresseDB::update
+     * @backupGlobals          disabled
      * @backupStaticAttributes disabled
      */
     public function testUpdate()

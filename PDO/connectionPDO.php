@@ -2,7 +2,7 @@
 /**
  * fichier necessaire a la connexion ala base de donnée, les variables de connexions sont définies dans le fichier constantes.php
  */
-include_once "Constantes.php";
+require_once "Constantes.php";
 try {
 
     $strConnection = Constantes::TYPE.':host='.Constantes::HOST.';dbname='.Constantes::BASE; 

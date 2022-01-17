@@ -3,47 +3,46 @@ require_once "Constantes.php";
 require_once "metier/Adresse.php";
 
 /**
- * 
- *Classe permettant d'acceder en bdd pour inserer supprimer modifier
+ * Classe permettant d'acceder en bdd pour inserer supprimer modifier
  * selectionner l'objet Adresse
- * @author pascal Lamy
  *
+ * @author pascal Lamy
  */
 class AdresseDB
 {
-	private $db; // Instance de PDO
+    private $db; // Instance de PDO
 
-	public function __construct($db)
-	{
-		$this->db = $db;;
-	}
-	/**
-	 * 
-	 * fonction d'Insertion de l'objet Adresse en base de donnee
-	 * @param Adresse $p
-	 */
-	public function ajout(Adresse $p)
-	{
-		//TODO insertion de l'adresse en bdd
-		$sql = $this->db->prepare('INSERT INTO adresse(numero,rue,codepostal,ville) values(:numero,:rue,:codePostal,:ville)');
+    public function __construct($db)
+    {
+        $this->db = $db;;
+    }
+    /**
+     * fonction d'Insertion de l'objet Adresse en base de donnee
+     *
+     * @param Adresse $p
+     */
+    public function ajout(Adresse $p)
+    {
+        //TODO insertion de l'adresse en bdd
+        $sql = $this->db->prepare('INSERT INTO adresse(numero,rue,codepostal,ville) values(:numero,:rue,:codePostal,:ville)');
 
-		$sql->bindValue(':numero', $p->GetNumero());
-		$sql->bindValue(':rue', $p->getRue());
-		$sql->bindValue(':codePostal', $p->getCodePostal());
-		$sql->bindValue(':ville', $p->getVille());
-		$sql->execute();
-		$sql->closeCursor();
-		$sql = NULL;
-	}
-	/**
-	 * 
-	 * fonction de Suppression de l'objet Adresse
-	 * @param Adresse $p
-	 */
-	public function suppression(Adresse $a)
-	{
-		//TODO suppression de l'adresse en bdd
-		$q = $this->db->prepare('DELETE FROM adresse WHERE numero=:n AND rue=:r AND codepostal=:c AND ville=:v');
+        $sql->bindValue(':numero', $p->GetNumero());
+        $sql->bindValue(':rue', $p->getRue());
+        $sql->bindValue(':codePostal', $p->getCodePostal());
+        $sql->bindValue(':ville', $p->getVille());
+        $sql->execute();
+        $sql->closeCursor();
+        $sql = null;
+    }
+    /**
+     * fonction de Suppression de l'objet Adresse
+     *
+     * @param Adresse $p
+     */
+    public function suppression(Adresse $a)
+    {
+        //TODO suppression de l'adresse en bdd
+        $q = $this->db->prepare('DELETE FROM adresse WHERE numero=:n AND rue=:r AND codepostal=:c AND ville=:v');
         $q->bindValue(':n', $a->getNumero());
         $q->bindValue(':r', $a->getRue(), PDO::PARAM_STR);
         $q->bindValue(':c', $a->getCodepostal());
@@ -52,108 +51,109 @@ class AdresseDB
         $q->closeCursor();
         $q = null;
 
-		/*$sql = $this->db->prepare('delete from adresse where id=:id');
+        /*$sql = $this->db->prepare('delete from adresse where id=:id');
 
-		$sql->bindValue(':id', $p->getId(), PDO::PARAM_INT);
-		$sql->execute();
-		$sql->closeCursor();
-		$sql = NULL;*/
-	}
-	/** 
-	 * Fonction de modification d'une adresse
-	 * @param Adresse $p
-	 * @throws Exception
-	 */
-	public function update(Adresse $p)
-	{
-		try {
-			//TODO mise a jour de l'adresse en bdd
-			$sql = $this->db->prepare('UPDATE adresse set numero=:numero,rue=:rue,codepostal=:codePostal,ville=:ville where id=:id');
-			$sql->bindValue(':id', $p->getId());
-			$sql->bindValue(':numero', $p->getNumero());
-			$sql->bindValue(':rue', $p->getRue());
-			$sql->bindValue(':codePostal', $p->getCodePostal());
-			$sql->bindValue(':ville', $p->getVille());
-			$sql->execute();
-			$sql->closeCursor();
-			$sql = NULL;
+        $sql->bindValue(':id', $p->getId(), PDO::PARAM_INT);
+        $sql->execute();
+        $sql->closeCursor();
+        $sql = NULL;*/
+    }
+    /** 
+     * Fonction de modification d'une adresse
+     *
+     * @param  Adresse $p
+     * @throws Exception
+     */
+    public function update(Adresse $p)
+    {
+        try {
+            //TODO mise a jour de l'adresse en bdd
+            $sql = $this->db->prepare('UPDATE adresse set numero=:numero,rue=:rue,codepostal=:codePostal,ville=:ville where id=:id');
+            $sql->bindValue(':id', $p->getId());
+            $sql->bindValue(':numero', $p->getNumero());
+            $sql->bindValue(':rue', $p->getRue());
+            $sql->bindValue(':codePostal', $p->getCodePostal());
+            $sql->bindValue(':ville', $p->getVille());
+            $sql->execute();
+            $sql->closeCursor();
+            $sql = null;
 
-		} catch (Exception $e) {
-			//TODO definir constante de l'exception
-			throw new Exception(Constantes::EXCEPTION_DB_ADRESSE);
-		}
-	}
-	/**
-	 * 
-	 * Fonction qui retourne toutes les adresses
-	 * @throws Exception
-	 */
-	public function selectAll()
-	{
-		//TODO selection de l'adresse
-		$query = 'SELECT id,numero,rue,codepostal,ville FROM adresse';
-		$q = $this->db->prepare($query);
-		$q->execute();
-
-		$result = $q->fetchAll(PDO::FETCH_CLASS);
-
-		//TODO definir constante de l'exception
-		if (empty($result)) {
-			throw new Exception(Constantes::EXCEPTION_DB_ADRESSE);
-		}
-
-		$q->closeCursor();
-		$q = NULL;
-		return $result;
-	}
-	/**
-	 * 
-	 * Fonction qui retourne l'adresse en fonction de son id
-	 * @throws Exception
-	 * @param $id
-	 */
-	public function selectAdresse($id)
-	{
-		//TODO selection de l'adresse en fonction de son id
-		if (empty($id)) {
+        } catch (Exception $e) {
+            //TODO definir constante de l'exception
             throw new Exception(Constantes::EXCEPTION_DB_ADRESSE);
         }
-		
-		$query = 'SELECT id,numero,rue,codepostal,ville FROM adresse WHERE id=:id ';
-		$q = $this->db->prepare($query);
+    }
+    /**
+     * Fonction qui retourne toutes les adresses
+     *
+     * @throws Exception
+     */
+    public function selectAll()
+    {
+        //TODO selection de l'adresse
+        $query = 'SELECT id,numero,rue,codepostal,ville FROM adresse';
+        $q = $this->db->prepare($query);
+        $q->execute();
+
+        $result = $q->fetchAll(PDO::FETCH_CLASS);
+
+        //TODO definir constante de l'exception
+        if (empty($result)) {
+            throw new Exception(Constantes::EXCEPTION_DB_ADRESSE);
+        }
+
+        $q->closeCursor();
+        $q = null;
+        return $result;
+    }
+    /**
+     * Fonction qui retourne l'adresse en fonction de son id
+     *
+     * @throws Exception
+     * @param  $id
+     */
+    public function selectAdresse($id)
+    {
+        //TODO selection de l'adresse en fonction de son id
+        if (empty($id)) {
+            throw new Exception(Constantes::EXCEPTION_DB_ADRESSE);
+        }
+        
+        $query = 'SELECT id,numero,rue,codepostal,ville FROM adresse WHERE id=:id ';
+        $q = $this->db->prepare($query);
 
 
-		$q->bindValue(':id', $id);
+        $q->bindValue(':id', $id);
 
-		$q->execute();
+        $q->execute();
 
-		$result = $q->fetch(PDO::FETCH_ASSOC);
+        $result = $q->fetch(PDO::FETCH_ASSOC);
 
-		//TODO definir constante de l'exception
-		if (empty($result)) {
-			throw new Exception(Constantes::EXCEPTION_DB_ADRESSE);
-		}
-		return $result;
-	}
-	/**
-	 * 
-	 * Fonction qui convertie un PDO Adresse en objet Adresse
-	 * @param $pdoAdres
-	 * @throws Exception
-	 */
-	public function convertPdoAdr($pdoAdres)
-	{
-		//TODO conversion du PDO ADRESSE en objet adresse
-		if (empty($pdoAdres)) {
-			throw new Exception(Constantes::EXCEPTION_DB_CONVERT_ADR);
-		}
-		//conversion du pdo en objet
-		$obj = (object)$pdoAdres;
-		//print_r($obj);
-		//conversion de l'objet en objet adresse
-		$adr = new Adresse($obj->numero, $obj->rue, $obj->codepostal, $obj->ville);
-		//affectation de l'id adr
-		$adr->setId($obj->id);
-		return $adr;
-	}
+        //TODO definir constante de l'exception
+        if (empty($result)) {
+            throw new Exception(Constantes::EXCEPTION_DB_ADRESSE);
+        }
+        return $this->convertPdoAdr($result);
+    }
+    /**
+     * Fonction qui convertie un PDO Adresse en objet Adresse
+     *
+     * @param  $pdoAdres
+     * @throws Exception
+     */
+    public function convertPdoAdr($pdoAdres)
+    {
+        //TODO conversion du PDO ADRESSE en objet adresse
+        if (empty($pdoAdres)) {
+            throw new Exception(Constantes::EXCEPTION_DB_CONVERT_ADR);
+        }
+        //conversion du pdo en objet
+        $obj = (object)$pdoAdres;
+        //print_r($obj);
+        //conversion de l'objet en objet adresse
+        $adr = new Adresse($obj->numero, $obj->rue, $obj->codepostal, $obj->ville);
+        //affectation de l'id adr
+        $adr->setId($obj->id);
+        return $adr;
+    }
 }

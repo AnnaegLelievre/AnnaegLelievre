@@ -18,7 +18,8 @@ class PersonneTest extends TestCase
 
     /**
      * Prepares the environment before running a test.
-     *  @coversNothing
+     *
+     * @coversNothing
      */
     public function setUp(): void
     {
@@ -27,13 +28,14 @@ class PersonneTest extends TestCase
         // TODO Auto-generated PersonneTest::setUp()
         $date = '15/12/1950';
         $dt = DateTime::createFromFormat('d/m/Y', $date);
-    $this->personne = new Personne("Hollande", "Francois", $dt, "0656463524", "fhollande@free.fr", "fhollande", "monpwd"/*, new Adresse(1, 5, "Ruaudaie", 56910, "Saint-Nicolas", 1)*/);
+        $this->personne = new Personne("Hollande", "Francois", $dt, "0656463524", "fhollande@free.fr", "fhollande", "monpwd"/*, new Adresse(1, 5, "Ruaudaie", 56910, "Saint-Nicolas", 1)*/);
         $this->personne->setId(49);
     }
 
     /**
      * Cleans up the environment after running a test.
-     *  @coversNothing
+     *
+     * @coversNothing
      */
     public function tearDown(): void
     {
@@ -69,7 +71,7 @@ class PersonneTest extends TestCase
     }
 
     /**
-     *@covers Personne::getPrenom
+     * @covers Personne::getPrenom
      * Tests Personne->getPrenom()
      */
     public function testGetPrenom()
@@ -88,6 +90,7 @@ class PersonneTest extends TestCase
 
     /**
      * Tests Personne->getTelephone()
+     *
      * @covers Personne::getTelephone
      */
     public function testGetTelephone()
@@ -99,6 +102,7 @@ class PersonneTest extends TestCase
 
     /**
      * Tests Personne->getEmail()
+     *
      * @covers Personne::getEmail
      */
     public function testGetEmail()
@@ -110,6 +114,7 @@ class PersonneTest extends TestCase
 
     /**
      * Tests Personne->getLogin()
+     *
      * @covers Personne::getLogin
      */
     public function testGetLogin()
@@ -121,6 +126,7 @@ class PersonneTest extends TestCase
 
     /**
      * Tests Personne->getPwd()
+     *
      * @covers Personne::getPwd
      */
     public function testGetPwd()
@@ -132,6 +138,7 @@ class PersonneTest extends TestCase
 
     /**
      * Tests Personne->setId()
+     *
      * @covers Personne::setId
      */
     public function testSetId()
@@ -143,6 +150,7 @@ class PersonneTest extends TestCase
 
     /**
      * Tests Personne->setNom()
+     *
      * @covers Personne::setNom
      */
     public function testSetNom()
@@ -155,6 +163,7 @@ class PersonneTest extends TestCase
 
     /**
      * Tests Personne->setPrenom()
+     *
      * @covers Personne::setPrenom
      */
     public function testSetPrenom()
@@ -198,6 +207,7 @@ class PersonneTest extends TestCase
 
     /**
      * Tests Personne->setLogin()
+     *
      * @covers Personne::setLogin
      */
 
@@ -210,6 +220,7 @@ class PersonneTest extends TestCase
 
     /**
      * Tests Personne->setPwd()
+     *
      * @covers Personne::setPwd
      */
     public function testSetPwd()
@@ -221,6 +232,7 @@ class PersonneTest extends TestCase
 
     /**
      * Tests Personne->__toString()
+     *
      * @covers Personne::__toString
      */
     public function test__toString()

@@ -1,10 +1,9 @@
 <?php
 
 /**
- * 
  * Classe permettant de definir une adresse
- * @author Pascal Lamy
  *
+ * @author Pascal Lamy
  */
 class Adresse
 {
@@ -74,7 +73,6 @@ class Adresse
     }
 
     /**
-     *
      * renvoie sous forme de chaine de caracteres l'objet adresse en appelant echo ou print
      */
 

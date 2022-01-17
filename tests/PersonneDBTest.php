@@ -3,7 +3,7 @@
 use PHPUnit\Framework\TestCase;
 
 require_once "Constantes.php";
-include_once "PDO/connectionPDO.php";
+require_once "PDO/connectionPDO.php";
 require_once "metier/Personne.php";
 require_once "PDO/PersonneDB.php";
 
@@ -23,7 +23,7 @@ class PersonneDBTest extends TestCase
 
     /**
      * 
-     * @backupGlobals disabled
+     * @backupGlobals          disabled
      * @backupStaticAttributes disabled
      * @coversNothing
      */
@@ -38,7 +38,7 @@ class PersonneDBTest extends TestCase
     }
 
     /**
-     *@coversNothing
+     * @coversNothing
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
      */
@@ -47,8 +47,8 @@ class PersonneDBTest extends TestCase
     }
 
     /**
-     * @covers PersonneDB::ajout
-     * @backupGlobals disabled
+     * @covers                 PersonneDB::ajout
+     * @backupGlobals          disabled
      * @backupStaticAttributes disabled
      */
     public function testAjout()
@@ -77,8 +77,8 @@ class PersonneDBTest extends TestCase
     }
 
     /**
-     * @covers PersonneDB::suppression
-     * @backupGlobals disabled
+     * @covers                 PersonneDB::suppression
+     * @backupGlobals          disabled
      * @backupStaticAttributes disabled
      */
     public function testSuppression()
@@ -105,7 +105,7 @@ class PersonneDBTest extends TestCase
      * @covers PersonneDB::selectionNom
      */
     /**
-     * @backupGlobals disabled
+     * @backupGlobals          disabled
      * @backupStaticAttributes disabled
      */
     public function testSelectionNom()
@@ -128,10 +128,9 @@ class PersonneDBTest extends TestCase
 
     /**
      * @covers PersonneDB::selectionId
-     *
      */
     /**
-     * @backupGlobals disabled
+     * @backupGlobals          disabled
      * @backupStaticAttributes disabled
      */
     public function testSelectionId()
@@ -150,8 +149,8 @@ class PersonneDBTest extends TestCase
     }
 
     /**
-     * @covers PersonneDB::selectAll
-     * @backupGlobals disabled
+     * @covers                 PersonneDB::selectAll
+     * @backupGlobals          disabled
      * @backupStaticAttributes disabled
      */
     public function testSelectAll()
@@ -172,8 +171,8 @@ class PersonneDBTest extends TestCase
     }
 
     /**
-     * @covers PersonneDB::convertPdoPers
-     * @backupGlobals disabled
+     * @covers                 PersonneDB::convertPdoPers
+     * @backupGlobals          disabled
      * @backupStaticAttributes disabled
      */
     public function testConvertPdoPers()
@@ -198,8 +197,8 @@ class PersonneDBTest extends TestCase
     }
 
     /**
-     * @covers PersonneDB::update
-     * @backupGlobals disabled
+     * @covers                 PersonneDB::update
+     * @backupGlobals          disabled
      * @backupStaticAttributes disabled
      */
     public function testUpdate()
@@ -234,8 +233,8 @@ class PersonneDBTest extends TestCase
     }
 
     /**
-     * @covers PersonneDB::authentification
-     * @backupGlobals disabled
+     * @covers                 PersonneDB::authentification
+     * @backupGlobals          disabled
      * @backupStaticAttributes disabled
      */
     public function testAuthentification()
