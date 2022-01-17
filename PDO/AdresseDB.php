@@ -25,7 +25,7 @@ class AdresseDB
 	public function ajout(Adresse $p)
 	{
 		//TODO insertion de l'adresse en bdd
-		$sql = $this->db->prepare('INSERT INTO adresse(numero,rue,codepostal,ville) values(:numero,:rue,:codePostal,:ville');
+		$sql = $this->db->prepare('INSERT INTO adresse(numero,rue,codepostal,ville) values(:numero,:rue,:codePostal,:ville)');
 
 		$sql->bindValue(':numero', $p->GetNumero());
 		$sql->bindValue(':rue', $p->getRue());
@@ -40,15 +40,24 @@ class AdresseDB
 	 * fonction de Suppression de l'objet Adresse
 	 * @param Adresse $p
 	 */
-	public function suppression(Adresse $p)
+	public function suppression(Adresse $a)
 	{
 		//TODO suppression de l'adresse en bdd
-		$sql = $this->db->prepare('delete from personne where id=:id');
+		$q = $this->db->prepare('DELETE FROM adresse WHERE numero=:n AND rue=:r AND codepostal=:c AND ville=:v');
+        $q->bindValue(':n', $a->getNumero());
+        $q->bindValue(':r', $a->getRue(), PDO::PARAM_STR);
+        $q->bindValue(':c', $a->getCodepostal());
+        $q->bindValue(':v', $a->getVille(), PDO::PARAM_STR);
+        $q->execute();
+        $q->closeCursor();
+        $q = null;
+
+		/*$sql = $this->db->prepare('delete from adresse where id=:id');
 
 		$sql->bindValue(':id', $p->getId(), PDO::PARAM_INT);
 		$sql->execute();
 		$sql->closeCursor();
-		$sql = NULL;
+		$sql = NULL;*/
 	}
 	/** 
 	 * Fonction de modification d'une adresse
@@ -59,8 +68,9 @@ class AdresseDB
 	{
 		try {
 			//TODO mise a jour de l'adresse en bdd
-			$sql = $this->db->prepare('UPDATE personne set numero=:numero,rue=:rue,codepostal=:codePostal,ville=:ville where id=:id');
-			$sql->bindValue(':numero', $p->GetNumero());
+			$sql = $this->db->prepare('UPDATE adresse set numero=:numero,rue=:rue,codepostal=:codePostal,ville=:ville where id=:id');
+			$sql->bindValue(':id', $p->getId());
+			$sql->bindValue(':numero', $p->getNumero());
 			$sql->bindValue(':rue', $p->getRue());
 			$sql->bindValue(':codePostal', $p->getCodePostal());
 			$sql->bindValue(':ville', $p->getVille());
@@ -81,7 +91,7 @@ class AdresseDB
 	public function selectAll()
 	{
 		//TODO selection de l'adresse
-		$query = 'SELECT id,numero,rue,codepostal,ville';
+		$query = 'SELECT id,numero,rue,codepostal,ville FROM adresse';
 		$q = $this->db->prepare($query);
 		$q->execute();
 
@@ -105,7 +115,11 @@ class AdresseDB
 	public function selectAdresse($id)
 	{
 		//TODO selection de l'adresse en fonction de son id
-		$query = 'SELECT id,numero,rue,codepostal,ville FROM   WHERE id= :id ';
+		if (empty($id)) {
+            throw new Exception(Constantes::EXCEPTION_DB_ADRESSE);
+        }
+		
+		$query = 'SELECT id,numero,rue,codepostal,ville FROM adresse WHERE id=:id ';
 		$q = $this->db->prepare($query);
 
 
@@ -137,7 +151,7 @@ class AdresseDB
 		$obj = (object)$pdoAdres;
 		//print_r($obj);
 		//conversion de l'objet en objet adresse
-		$adr = new Adresse($obj->id, $obj->numero, $obj->rue, $obj->codePostal, $obj->ville);
+		$adr = new Adresse($obj->numero, $obj->rue, $obj->codepostal, $obj->ville);
 		//affectation de l'id adr
 		$adr->setId($obj->id);
 		return $adr;

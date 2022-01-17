@@ -10,6 +10,6 @@ _____________________-implémenter le test de la méthode authentification dans 
 	-------------vue vueMoncompte.php
 	-insérer un datePicker au niveau du champ date de naissance
 	
--implementer le back de l'item MonCompte permettant de mettre à jour les informations de l'utilisateur ( compte utilisateur et son adresse) en bdd:
-	-controller validCompteController.php
-	-vue vueValidcompte.php
+--------implementer le back de l'item MonCompte permettant de mettre à jour les informations de l'utilisateur ( compte utilisateur et son adresse) en bdd:
+	-------------controller validCompteController.php
+ enlever com------vue vueValidcompte.php

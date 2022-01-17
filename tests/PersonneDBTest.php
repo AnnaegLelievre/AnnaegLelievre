@@ -31,7 +31,7 @@ class PersonneDBTest extends TestCase
     protected function setUp(): void
     {
         //parametre de connexion à la bae de donnée
-        $strConnection = Constantes::TYPE . ':host=' . Constantes::HOST . '3309;dbname=' . Constantes::BASE;
+        $strConnection = Constantes::TYPE . ':host=' . Constantes::HOST . ';dbname=' . Constantes::BASE;
         $arrExtraParam = array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8");
         $this->pdodb = new PDO($strConnection, Constantes::USER, Constantes::PASSWORD, $arrExtraParam); //Ligne 3; Instancie la connexion
         $this->pdodb->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -57,7 +57,7 @@ class PersonneDBTest extends TestCase
             $this->personne = new PersonneDB($this->pdodb);
 
             $dt = new DateTime('1950-01-12');
-            $p = new Personne("Hollande", "Francois", $dt, "0656463524", "fhollande@free.fr", "fhollande", "monpwd", new Adresse(1, 5, "Ruaudaie", 56910, "Saint-Nicolas", 3));
+            $p = new Personne("Hollande", "Francois", $dt, "0656463524", "fhollande@free.fr", "fhollande", "monpwd");
             $p->setPwd("monpwd");
             //insertion en bdd
             $this->personne->ajout($p);
@@ -112,7 +112,7 @@ class PersonneDBTest extends TestCase
     {
         $this->personne = new PersonneDB($this->pdodb);
         $dt = new DateTime('1850-11-20');
-        $p = new Personne("Valjean", "jean", $dt, "0712233445", "jvaljean@free.fr", "jvaljean", "cosette", new Adresse(3, 25, "Larue", 35000, "Rennes", 2));
+        $p = new Personne("Valjean", "jean", $dt, "0712233445", "jvaljean@free.fr", "jvaljean", "cosette", new Adresse(25, "Larue", 35000, "Rennes", 2));
         $p->setPwd("cosette");
         $this->personne->ajout($p);
 
@@ -208,7 +208,7 @@ class PersonneDBTest extends TestCase
         $this->personne = new PersonneDB($this->pdodb);
         //insertion en bdd de l'enreg
         $dt = new DateTime('1950-01-12');
-        $p = new Personne("Hollande", "Francois", $dt, "0656463524", "fhollande@free.fr", "fhollande", "monpwd", new Adresse(1, 5, "Ruaudaie", 56910, "Saint-Nicolas", 8));
+        $p = new Personne("Hollande", "Francois", $dt, "0656463524", "fhollande@free.fr", "fhollande", "monpwd");
         $p->setPwd("monpwd");
         $p->setId(99);
         //insertion en bdd
@@ -217,7 +217,7 @@ class PersonneDBTest extends TestCase
         //instanciation de l'objet pour mise ajour
 
         $dt = new DateTime('1970-09-10');
-        $p = new Personne("Martin", "Eric", $dt, "0102030405", "meric@orange.fr", "meric", "4755edd32703675c6a021322f9ca0433", new Adresse(2, 6, "La Ruaudaie", 56911, "Saint-Nico", 9));
+        $p = new Personne("Martin", "Eric", $dt, "0102030405", "meric@orange.fr", "meric", "4755edd32703675c6a021322f9ca0433");
         //update pers 
         $lastId = $this->pdodb->lastInsertId();
         $p->setId($lastId);
@@ -244,7 +244,7 @@ class PersonneDBTest extends TestCase
         $this->personne = new PersonneDB($this->pdodb);
         //insertion en bdd de l'enreg
         $dt = new DateTime('1950-01-12');
-        $p = new Personne("Hollande", "Francois", $dt, "0656463524", "fhollande@free.fr", "fhollande", "monpwd", new Adresse(1, 55, "Rue du Faubourg Saint-Honoré", 75008, "Paris", 4));
+        $p = new Personne("Hollande", "Francois", $dt, "0656463524", "fhollande@free.fr", "fhollande", "monpwd", new Adresse(55, "Rue du Faubourg Saint-Honoré", 75008, "Paris", 4));
         $p->setPwd("monpwd");
         $p->setId(99);
         //insertion en bdd

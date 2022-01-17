@@ -5,7 +5,7 @@
 include_once "Constantes.php";
 try {
 
-    $strConnection = Constantes::TYPE.':host='.Constantes::HOST.':3309;dbname='.Constantes::BASE; 
+    $strConnection = Constantes::TYPE.':host='.Constantes::HOST.';dbname='.Constantes::BASE; 
     $arrExtraParam= array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8");
     $pdo = new PDO($strConnection, Constantes::USER, Constantes::PASSWORD, $arrExtraParam); //Ligne 3; Instancie la connexion
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);//Ligne 4

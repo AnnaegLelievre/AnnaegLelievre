@@ -31,7 +31,7 @@ class AdresseDBTest extends TestCase
     protected function setUp(): void
     {
         //parametre de connexion à la bae de donnée
-        $strConnection = Constantes::TYPE . ':host=' . Constantes::HOST . '3309;dbname=' . Constantes::BASE;
+        $strConnection = Constantes::TYPE . ':host=' . Constantes::HOST . ';dbname=' . Constantes::BASE;
         $arrExtraParam = array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8");
         $this->pdodb = new PDO($strConnection, Constantes::USER, Constantes::PASSWORD, $arrExtraParam); //Ligne 3; Instancie la connexion
         $this->pdodb->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -56,10 +56,12 @@ class AdresseDBTest extends TestCase
         try {
             $this->adresse = new AdresseDB($this->pdodb);
 
-            $p = new Adresse(6, 6, "Larue", 35000, "Laville");
+            $p = new Adresse(6, "Larue", 35000, "Laville");
             //insertion en bdd
             $this->adresse->ajout($p);
-
+            $lastId = $this->pdodb->lastInsertId();
+            $p->setId($lastId);
+            
             $adr = $this->adresse->selectAdresse($p->getId());
             //echo "adr bdd: $adr";
             $this->assertEquals($p->getId(), $adr->getId());
@@ -81,10 +83,10 @@ class AdresseDBTest extends TestCase
     {
         try {
             $this->adresse = new AdresseDB($this->pdodb);
-
-            $adr = $this->adresse->selectAdresse("1");
+            $lastId = $this->pdodb->lastInsertId();
+            $adr = $this->adresse->selectAdresse($lastId);
             $this->adresse->suppression($adr);
-            $adr2 = $this->adresse->selectAdresse("1");
+            $adr2 = $this->adresse->selectAdresse($lastId);
             if ($adr2 != null) {
                 $this->markTestIncomplete(
                     "La suppression de l'enreg adresse a echoué"
@@ -108,12 +110,17 @@ class AdresseDBTest extends TestCase
     public function testSelectAdresse()
     {
         $this->adresse = new AdresseDB($this->pdodb);
-        $p = $this->adresse->selectAdresse("1");
-        $this->assertEquals($p->getId(), $p->getId());
-        $this->assertEquals($p->getNumero(), $p->getNumero());
-        $this->assertEquals($p->getRue(), $p->getRue());
-        $this->assertEquals($p->getCodePostal(), $p->getCodePostal());
-        $this->assertEquals($p->getVille(), $p->getVille());
+        $p = new Adresse("4", "Rue de la rue", "56000", "Vannes");
+        $this->adresse->ajout($p);
+        $lastId = $this->pdodb->lastInsertId();
+        $p->setId($lastId);
+
+        $adr = $this->adresse->selectAdresse($p->getId());
+        $this->assertEquals($p->getId(), $adr->getId());
+        $this->assertEquals($p->getNumero(), $adr->getNumero());
+        $this->assertEquals($p->getRue(), $adr->getRue());
+        $this->assertEquals($p->getCodePostal(), $adr->getCodePostal());
+        $this->assertEquals($p->getVille(), $adr->getVille());
     }
 
     /**
@@ -168,16 +175,15 @@ class AdresseDBTest extends TestCase
 
         $this->adresse = new AdresseDB($this->pdodb);
         //insertion en bdd de l'enreg
-        $p = new Adresse(1, 67, "Lotrerue", 56000, "Lotreville");
+        $p = new Adresse(67, "Lotrerue", 56000, "Lotreville");
         //insertion en bdd
         $this->adresse->ajout($p);
-
-        //instanciation de l'objet pour mise ajour
-
-        $p = new Adresse(1, 4, "thatRue", 35000, "thatVille");
-        //update pers 
+        //update adr
         $lastId = $this->pdodb->lastInsertId();
         $p->setId($lastId);
+
+
+        //instanciation de l'objet pour mise ajour
         $this->adresse->update($p);
         $adr = $this->adresse->selectAdresse($p->getId());
         $this->assertEquals($p->getId(), $adr->getId());

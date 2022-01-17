@@ -150,7 +150,7 @@ class PersonneDB
 		//conversion de l'objet en objet personne
 		//conversion date naissance en datetime
 		$dt = new  DateTime($obj->datenaissance);
-		$pers = new Personne($obj->nom, $obj->prenom, $dt, $obj->telephone, $obj->email, $obj->login, $obj->pwd, new Adresse(1, 4, "hfhjfj", 35000, "jfjfkjd", 1));
+		$pers = new Personne($obj->nom, $obj->prenom, $dt, $obj->telephone, $obj->email, $obj->login, $obj->pwd);
 		//affectation de l'id pers
 		$pers->setId($obj->id);
 		return $pers;

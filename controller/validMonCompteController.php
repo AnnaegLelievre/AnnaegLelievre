@@ -26,7 +26,7 @@ class validMonCompteController
                 $_POST['email'],
                 $_POST['login'],
                 md5($_POST['pwd']),
-                new Adresse(1, 5 , "ytgfh", 35000, "YUF", 1)
+                new Adresse(1, 5, "ytgfh", 35000, "YUF", 1)
             );
             $pers->setId($result['id']);
             $pers->setPwd(($_POST['newpwd']) ?: $_POST['pwd']);
